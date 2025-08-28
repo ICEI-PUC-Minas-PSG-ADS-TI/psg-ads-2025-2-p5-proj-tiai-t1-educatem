@@ -1,25 +1,25 @@
-# TÍTULO DO PROJETO
+# Trilha Do Saber
 
-`CURSO`
+Análise e Desenvolvimento de Sistemas/ Sistema de Informação
 
-`DISCIPLINA`
+Trabalho Interdisciplinar
 
-`SEMESTRE`
+4° Semestre
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+A Trilha Do Saber é uma plataforma de vídeo aulas interativas sobre matérias básicas, criada para tornar o aprendizado simples, acessível e envolvente. Com trilhas de estudo organizadas por temas e níveis, o aluno pode assistir aulas online, praticar com exercícios em tempo real e acompanhar seu progresso de forma gamificada. Seja para reforçar conteúdos da escola, revisar para provas ou aprender no seu próprio ritmo, o EducaTem oferece conhecimento de qualidade em poucos cliques.
 
 ODS Alinhados:
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Arthur Henrique Dias Da Silva Campos
+* Gabriel Neves Fonseca
+* Edrei Dornelas Machado
+* Leonardo Mendes Rocha
 
 ## Orientador
 
-* Nome completo do professor 1
+Juliana Padilha
 
 ## Instruções de utilização
 
@@ -54,4 +54,3 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
     * Implementação da funcionalidade X pertencente ao processo P.
 * 0.0.1
     * Trabalhando na modelagem do processo de negócio.
-
