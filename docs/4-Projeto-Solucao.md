@@ -44,11 +44,16 @@ Eles ajudam a planejar, comunicar ideias e validar a interface com antecedência
 📌 **Entrega:** incluir imagens ou links para os wireframes/mockups.
 
 **Wireframe 1 — Tela Principal**  
-*(inserir imagem ou diagrama)*
+![Tela Inicial](images/telainicial.png) 
 
 **Wireframe 2 — Tela de Login**  
-*(inserir imagem ou diagrama)*
+![Tela de Login](images/telalogin.png) 
 
+**Wireframe 3 — Tela do Curso**  
+![Tela do Curso](images/telacurso.png)
+
+**Wireframe 4 — Tela - Trilhas de Estudo**  
+![Tela do Curso](images/telatrilhas.png) 
 
 ---
 **UML**
