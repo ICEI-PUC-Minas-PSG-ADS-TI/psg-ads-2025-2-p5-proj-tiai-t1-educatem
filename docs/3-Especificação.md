@@ -127,14 +127,14 @@ O Quadro abaixo deve ser preenchida com as restrições específicas que **impac
 
 | ID  | Restrição                                                              |
 |------|-----------------------------------------------------------------------|
-| R-01   | O projeto deverá ser entregue até o final do semestre.              |
-| R-02   | O sistema deve funcionar apenas dentro da rede interna da empresa.  |
-| R-03   | O software deve ser compatível com Windows e Linux.                 |
+| R-01   | O projeto deverá ser entregue até o final do semestre letivo 2025/2. |
+| R-02   | O sistema deve ser acessível via internet para permitir uso em qualquer localização. |
+| R-03   | O software deve ser compatível com Windows, Linux, Android e iOS.   |
 | R-04   | A plataforma deve atender às normas de acessibilidade para pessoas com deficiência (WCAG 2.1). |
-| R-05   |O uso de tecnologias específicas (ex: React para frontend e Node.js para backend) deve ser respeitado.|
-| R-06   | O sistema deve garantir backups automáticos diários dos dados dos usuários. |
-| R-07   | *(Descreva aqui a restrição 7 do seu projeto)*                      |
-| R-08   | *(Descreva aqui a restrição 8 do seu projeto)*                      |
+| R-05   | O uso de tecnologias web modernas (React para frontend e Node.js para backend) deve ser respeitado. |
+| R-06   | O sistema deve garantir backups automáticos diários dos dados dos usuários e progresso acadêmico. |
+| R-07   | A plataforma deve funcionar adequadamente em dispositivos com conexão de internet limitada (3G/4G). |
+| R-08   | O conteúdo das vídeo aulas deve respeitar direitos autorais e licenças de uso educacional. |
 
 ---
 ## 3.5 Regras de Negócio
@@ -157,11 +157,16 @@ O Quadro abaixo deve ser preenchida com as restrições específicas que **impac
 
 |ID    | Regra de Negócio                                                                              |
 |-------|-------------------------------------------------------------------------------------------   |
-|RN-01 | O aluno só pode acessar os conteúdos da trilha correspondente ao seu nível cadastrado.        |
-|RN-02 | O sistema deve liberar exercícios somente após o aluno assistir à vídeo aula correspondente.  |
-|RN-03 | Tarefas vencidas devem ser destacadas em vermelho no sistema.                                 |
-|RN-04 | O aluno só pode fazer a recuperação de senha mediante confirmação via e-mail cadastrado.      |
-|RN-05 | O progresso do aluno só é atualizado após o término completo da aula ou exercício.            |
+|RN-01 | O aluno só pode acessar conteúdos da trilha correspondente ao seu nível cadastrado (fundamental ou médio). |
+|RN-02 | O sistema deve liberar exercícios somente após o aluno assistir pelo menos 80% da vídeo aula correspondente. |
+|RN-03 | O aluno deve completar pelo menos 70% dos exercícios de uma aula para desbloquear a próxima aula da trilha. |
+|RN-04 | O aluno só pode fazer a recuperação de senha mediante confirmação via e-mail cadastrado no sistema. |
+|RN-05 | O progresso do aluno só é atualizado após o término completo da aula ou exercício, com confirmação de salvamento. |
+|RN-06 | Pontos e badges só são concedidos quando o aluno atinge pelo menos 60% de acerto nos exercícios. |
+|RN-07 | O sistema deve permitir apenas um cadastro por e-mail para evitar contas duplicadas. |
+|RN-08 | Vídeo aulas devem ter duração máxima de 15 minutos para otimizar o aprendizado e manter o foco do aluno. |
+|RN-09 | O aluno pode assistir às aulas quantas vezes quiser, mas o progresso é contabilizado apenas na primeira visualização completa. |
+|RN-10 | O sistema deve bloquear temporariamente (24h) contas com mais de 5 tentativas de login incorretas consecutivas. |
 
 💡 **Dica:** Explique sempre o motivo ou impacto da regra no sistema.
 
