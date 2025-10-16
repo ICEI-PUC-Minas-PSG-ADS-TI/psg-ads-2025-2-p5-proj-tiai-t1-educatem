@@ -65,114 +65,116 @@ Eles ajudam a planejar, comunicar ideias e validar a interface com antecedência
 
 O diagrama de classes ilustra graficamente como será a estrutura do software, e como cada uma das classes da sua estrutura estarão interligadas. Essas classes servem de modelo para materializar os objetos que executarão na memória.
 
+![Diagrama de Classes](images/diagramaclasses.png)
+
 ### Descrição das Classes e seus Relacionamentos:
 
-A seguir, são detalhadas as principais classes do sistema, seus atributos, métodos e os relacionamentos entre elas, fundamentais para a estrutura da plataforma "Trilha Do Saber".
+A seguir, são detalhadas as principais classes do sistema, seus atributos, métodos e os relacionamentos entre elas, fundamentais para a estrutura da plataforma "EducaTem".
 
-**1. Classe Usuário**
+  **1. Classe Usuário**
 
-- **Propósito:** Representa qualquer pessoa com acesso à plataforma, seja aluno, professor ou responsável. Serve como uma classe base para perfis específicos.
-- **Atributos:**
-  - `id`: Identificador único do usuário (chave primária).
-  - `nome`: Nome completo do usuário.
-  - `email`: Endereço de e-mail do usuário (único).
-  - `senha`: Senha do usuário (criptografada).
-  - `dataCadastro`: Data e hora do cadastro do usuário.
-  - `ultimoLogin`: Data e hora do último acesso do usuário.
-- **Métodos:**
-  - `cadastrar()`: Permite a criação de uma nova conta de usuário.
-  - `fazerLogin()`: Autentica o usuário na plataforma.
-  - `fazerLogout()`: Finaliza a sessão do usuário.
-  - `recuperarSenha()`: Inicia o processo de recuperação de senha.
+  - **Propósito:** Representa qualquer pessoa com acesso à plataforma, seja aluno, professor ou responsável. Serve como uma classe base para perfis específicos.
+  - **Atributos:**
+    - `id`: Identificador único do usuário (chave primária).
+    - `nome`: Nome completo do usuário.
+    - `email`: Endereço de e-mail do usuário (único).
+    - `senha`: Senha do usuário (criptografada).
+    - `dataCadastro`: Data e hora do cadastro do usuário.
+    - `ultimoLogin`: Data e hora do último acesso do usuário.
+  - **Métodos:**
+    - `cadastrar()`: Permite a criação de uma nova conta de usuário.
+    - `fazerLogin()`: Autentica o usuário na plataforma.
+    - `fazerLogout()`: Finaliza a sessão do usuário.
+    - `recuperarSenha()`: Inicia o processo de recuperação de senha.
 
-**2. Classe Aluno**
+  **2. Classe Aluno**
 
-- **Propósito:** Representa um estudante da plataforma, herdando características de `Usuário` e adicionando informações específicas de aprendizado.
-- **Herda de:** `Usuário`
-- **Atributos:**
-  - `nivelEnsino`: Nível de ensino do aluno (ex: fundamental, médio).
-  - `pontuacaoTotal`: Pontuação acumulada nas atividades gamificadas.
-  - `badges`: Lista de distintivos (badges) conquistados pelo aluno.
-- **Métodos:**
-  - `assistirAula(aula: Aula)`: Registra a visualização de uma aula.
-  - `fazerExercicio(exercicio: Exercício)`: Permite a realização de exercícios.
-  - `acompanharProgresso()`: Exibe o progresso do aluno nas trilhas de estudo.
-- **Relacionamentos:**
-  - `1:N` com `ProgressoAluno` (um aluno tem muitos progressos).
-  - `1:N` com `Gamificacao` (um aluno pode ter muitas recompensas).
+  - **Propósito:** Representa um estudante da plataforma, herdando características de `Usuário` e adicionando informações específicas de aprendizado.
+  - **Herda de:** `Usuário`
+  - **Atributos:**
+    - `nivelEnsino`: Nível de ensino do aluno (ex: fundamental, médio).
+    - `pontuacaoTotal`: Pontuação acumulada nas atividades gamificadas.
+    - `badges`: Lista de distintivos (badges) conquistados pelo aluno.
+  - **Métodos:**
+    - `assistirAula(aula: Aula)`: Registra a visualização de uma aula.
+    - `fazerExercicio(exercicio: Exercício)`: Permite a realização de exercícios.
+    - `acompanharProgresso()`: Exibe o progresso do aluno nas trilhas de estudo.
+  - **Relacionamentos:**
+    - `1:N` com `ProgressoAluno` (um aluno tem muitos progressos).
+    - `1:N` com `Gamificacao` (um aluno pode ter muitas recompensas).
 
-**3. Classe TrilhaDeEstudo**
+  **3. Classe TrilhaDeEstudo**
 
-- **Propósito:** Organiza o conteúdo didático em temas e níveis específicos, guiando o aprendizado do aluno.
-- **Atributos:**
-  - `id`: Identificador único da trilha de estudo (chave primária).
-  - `nome`: Nome da trilha (ex: Matemática Fundamental).
-  - `descricao`: Descrição detalhada da trilha.
-  - `nivel`: Nível de ensino associado à trilha.
-- **Relacionamentos:**
-  - `1:N` com `Aula` (uma trilha contém muitas aulas).
+  - **Propósito:** Organiza o conteúdo didático em temas e níveis específicos, guiando o aprendizado do aluno.
+  - **Atributos:**
+    - `id`: Identificador único da trilha de estudo (chave primária).
+    - `nome`: Nome da trilha (ex: Matemática Fundamental).
+    - `descricao`: Descrição detalhada da trilha.
+    - `nivel`: Nível de ensino associado à trilha.
+  - **Relacionamentos:**
+    - `1:N` com `Aula` (uma trilha contém muitas aulas).
 
-**4. Classe Aula**
+  **4. Classe Aula**
 
-- **Propósito:** Representa uma vídeo aula individual dentro de uma trilha de estudo.
-- **Atributos:**
-  - `id`: Identificador único da aula (chave primária).
-  - `titulo`: Título da aula.
-  - `descricao`: Descrição do conteúdo da aula.
-  - `urlVideo`: URL para o vídeo da aula.
-  - `duracao`: Duração da aula em minutos.
-  - `tema`: Tema da aula.
-  - `nivel`: Nível de ensino da aula.
-- **Relacionamentos:**
-  - `N:1` com `TrilhaDeEstudo` (muitas aulas pertencem a uma trilha).
-  - `1:N` com `Exercício` (uma aula pode ter vários exercícios).
-  - `1:N` com `ProgressoAluno` (uma aula pode ser registrada em vários progressos de alunos).
+  - **Propósito:** Representa uma vídeo aula individual dentro de uma trilha de estudo.
+  - **Atributos:**
+    - `id`: Identificador único da aula (chave primária).
+    - `titulo`: Título da aula.
+    - `descricao`: Descrição do conteúdo da aula.
+    - `urlVideo`: URL para o vídeo da aula.
+    - `duracao`: Duração da aula em minutos.
+    - `tema`: Tema da aula.
+    - `nivel`: Nível de ensino da aula.
+  - **Relacionamentos:**
+    - `N:1` com `TrilhaDeEstudo` (muitas aulas pertencem a uma trilha).
+    - `1:N` com `Exercício` (uma aula pode ter vários exercícios).
+    - `1:N` com `ProgressoAluno` (uma aula pode ser registrada em vários progressos de alunos).
 
-**5. Classe Exercício**
+  **5. Classe Exercício**
 
-- **Propósito:** Oferece atividades práticas para reforçar o aprendizado das aulas.
-- **Atributos:**
-  - `id`: Identificador único do exercício (chave primária).
-  - `titulo`: Título do exercício.
-  - `descricao`: Enunciado ou descrição do exercício.
-  - `tipo`: Tipo de exercício (ex: múltipla escolha, verdadeiro/falso).
-  - `respostasCorretas`: Objeto ou array com as respostas corretas.
-- **Métodos:**
-  - `realizarExercicio()`: Permite que o aluno interaja com o exercício.
-  - `obterFeedback()`: Fornece feedback imediato sobre a resposta do aluno.
-- **Relacionamentos:**
-  - `N:1` com `Aula` (muitos exercícios estão associados a uma aula).
+  - **Propósito:** Oferece atividades práticas para reforçar o aprendizado das aulas.
+  - **Atributos:**
+    - `id`: Identificador único do exercício (chave primária).
+    - `titulo`: Título do exercício.
+    - `descricao`: Enunciado ou descrição do exercício.
+    - `tipo`: Tipo de exercício (ex: múltipla escolha, verdadeiro/falso).
+    - `respostasCorretas`: Objeto ou array com as respostas corretas.
+  - **Métodos:**
+    - `realizarExercicio()`: Permite que o aluno interaja com o exercício.
+    - `obterFeedback()`: Fornece feedback imediato sobre a resposta do aluno.
+  - **Relacionamentos:**
+    - `N:1` com `Aula` (muitos exercícios estão associados a uma aula).
 
-**6. Classe ProgressoAluno**
+  **6. Classe ProgressoAluno**
 
-- **Propósito:** Registra o status e o avanço de um aluno em relação a uma aula específica.
-- **Atributos:**
-  - `id`: Identificador único do registro de progresso (chave primária).
-  - `alunoId`: Chave estrangeira para o `Aluno`.
-  - `aulaId`: Chave estrangeira para a `Aula`.
-  - `status`: Status da aula para o aluno (ex: 'iniciada', 'concluída').
-  - `porcentagemConclusao`: Porcentagem de conclusão da aula pelo aluno.
-  - `dataUltimoAcesso`: Data do último acesso do aluno a essa aula.
-- **Relacionamentos:**
-  - `N:1` com `Aluno` (muitos progressos para um aluno).
-  - `N:1` com `Aula` (muitos progressos para uma aula).
+  - **Propósito:** Registra o status e o avanço de um aluno em relação a uma aula específica.
+  - **Atributos:**
+    - `id`: Identificador único do registro de progresso (chave primária).
+    - `alunoId`: Chave estrangeira para o `Aluno`.
+    - `aulaId`: Chave estrangeira para a `Aula`.
+    - `status`: Status da aula para o aluno (ex: 'iniciada', 'concluída').
+    - `porcentagemConclusao`: Porcentagem de conclusão da aula pelo aluno.
+    - `dataUltimoAcesso`: Data do último acesso do aluno a essa aula.
+  - **Relacionamentos:**
+    - `N:1` com `Aluno` (muitos progressos para um aluno).
+    - `N:1` com `Aula` (muitos progressos para uma aula).
 
-**7. Classe Gamificacao**
+  **7. Classe Gamificacao**
 
-- **Propósito:** Gerencia os pontos, badges e outras recompensas para motivar os alunos.
-- **Atributos:**
-  - `id`: Identificador único do registro de gamificação (chave primária).
-  - `alunoId`: Chave estrangeira para o `Aluno`.
-  - `tipoRecompensa`: Tipo de recompensa (ex: 'ponto', 'badge').
-  - `valor`: Valor da recompensa (ex: 10 pontos, nome do badge).
-  - `dataConquista`: Data da conquista da recompensa.
-- **Relacionamentos:**
-  - `N:1` com `Aluno` (muitas recompensas para um aluno).
+  - **Propósito:** Gerencia os pontos, badges e outras recompensas para motivar os alunos.
+  - **Atributos:**
+    - `id`: Identificador único do registro de gamificação (chave primária).
+    - `alunoId`: Chave estrangeira para o `Aluno`.
+    - `tipoRecompensa`: Tipo de recompensa (ex: 'ponto', 'badge').
+    - `valor`: Valor da recompensa (ex: 10 pontos, nome do badge).
+    - `dataConquista`: Data da conquista da recompensa.
+  - **Relacionamentos:**
+    - `N:1` com `Aluno` (muitas recompensas para um aluno).
 
-As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Classes”.
+  As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Classes”.
 
-> - [Diagramas de Classes - Documentação da IBM](https://www.ibm.com/docs/pt-br/rational-soft-arch/9.6.1?topic=diagrams-class)
-> - [O que é um diagrama de classe UML? | Lucidchart](https://www.lucidchart.com/pages/pt/o-que-e-diagrama-de-classe-uml)
+  > - [Diagramas de Classes - Documentação da IBM](https://www.ibm.com/docs/pt-br/rational-soft-arch/9.6.1?topic=diagrams-class)
+  > - [O que é um diagrama de classe UML? | Lucidchart](https://www.lucidchart.com/pages/pt/o-que-e-diagrama-de-classe-uml)
 
 ---
 
