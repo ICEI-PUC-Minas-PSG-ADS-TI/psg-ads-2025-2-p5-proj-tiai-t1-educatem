@@ -290,12 +290,6 @@ A modelagem do banco de dados relacional para a plataforma "Trilha Do Saber" é 
 - Relacionamentos devem estar corretamente cardinalizados.
 - O diagrama deve contemplar todas as funcionalidades levantadas nos processos de negócio.
 
-**Exemplo de imagem:**
-
-![Diagrama ER - Exemplo](./images/DER.png)
-
-📌 **Entrega:** gere o diagrama no BR Modelo, exporte em **.png** e inclua-o nesta seção.
-
 ---
 
 ### 4.4.2 Esquema Relacional
