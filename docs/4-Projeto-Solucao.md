@@ -11,13 +11,12 @@
 Nesta seção, descreva como os componentes do sistema se organizam e interagem.  
 Inclua um **diagrama de arquitetura** mostrando módulos, camadas e tecnologias utilizadas.
 
-A arquitetura da solução será dividida em três camadas principais:
+A arquitetura da solução será dividida em duas camadas principais, com uma integração de banco de dados:
 
-- **Frontend (Cliente):** Desenvolvido com **React**, responsável pela interface do usuário, interatividade e consumo dos serviços do backend. Será acessível via navegadores web.
-- **Backend (Servidor):** Implementado utilizando **Node.js**, atuará como a camada de API (Application Programming Interface), processando as requisições do frontend, gerenciando a lógica de negócio e interagindo com o banco de dados.
-- **Banco de Dados:** Utilizará **MySQL** para armazenar todas as informações do sistema, como dados de usuários, cursos, progresso e gamificação.
+- **Frontend e Backend (Next.js):** Desenvolvido com **Next.js**, o projeto unificará as camadas de frontend (interface do usuário e interatividade) e backend (lógica de negócio e APIs) através de suas funcionalidades de roteamento de API (Next.js API Routes). O frontend será responsável pela renderização da interface e consumo das APIs internas, enquanto o backend processará as requisições, gerenciará a lógica de negócio e interagirá com o banco de dados.
+- **Banco de Dados:** Utilizará **NeonDB**, um banco de dados compatível com **PostgreSQL**, para armazenar todas as informações do sistema, como dados de usuários, cursos, progresso e gamificação.
 
-A comunicação entre o Frontend e o Backend será realizada através de APIs RESTful.
+A comunicação entre o frontend e as Next.js API Routes ocorrerá de forma integrada na própria aplicação Next.js, e as API Routes se comunicarão com o NeonDB utilizando drivers PostgreSQL.
 
 **Orientações:**
 
@@ -308,95 +307,102 @@ A modelagem do banco de dados relacional para a plataforma "Trilha Do Saber" é 
 
 ### 4.4.2 Esquema Relacional
 
-O **Esquema Relacional** converte o Modelo ER para tabelas relacionais, incluindo chaves primárias, estrangeiras e restrições de integridade.  
-Utilize o **[MySQL Workbench](https://www.mysql.com/products/workbench/)** para gerar o diagrama de tabelas (Modelo Lógico).
+O **Esquema Relacional** converte o Modelo ER para tabelas relacionais, incluindo chaves primárias, estrangeiras e restrições de integridade.
 
-#### Descrição do Esquema Relacional (MySQL):
+#### Descrição do Esquema Relacional (PostgreSQL/NeonDB):
 
-O esquema relacional da plataforma "Trilha Do Saber" será implementado no MySQL, com as seguintes tabelas, colunas, tipos de dados e restrições:
+O esquema relacional da plataforma "Trilha Do Saber" será implementado no **NeonDB (PostgreSQL)**, com as seguintes tabelas, colunas, tipos de dados e restrições:
 
 **1. Tabela `Usuarios`**
 
 - **Propósito:** Armazenar dados de autenticação e informações básicas de todos os usuários.
 - **Colunas:**
-  - `id_usuario` INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+  - `id_usuario` SERIAL PRIMARY KEY
   - `nome` VARCHAR(100) NOT NULL
   - `email` VARCHAR(100) NOT NULL UNIQUE
-  - `senha` VARCHAR(255) NOT NULL (Para senhas criptografadas)
-  - `data_cadastro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-  - `ultimo_login` DATETIME
+  - `senha` VARCHAR(255) NOT NULL
+  - `data_cadastro` TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+  - `ultimo_login` TIMESTAMPTZ
+- **Restrições:**
+  - UNIQUE (`email`)
 
 **2. Tabela `Alunos`**
 
 - **Propósito:** Complementar as informações dos usuários que são alunos.
 - **Colunas:**
   - `id_aluno` INT NOT NULL PRIMARY KEY
-  - `nivel_ensino` ENUM('fundamental', 'medio') NOT NULL
+  - `nivel_ensino` VARCHAR(50) NOT NULL
   - `pontuacao_total` INT DEFAULT 0
 - **Restrições:**
   - FOREIGN KEY (`id_aluno`) REFERENCES `Usuarios`(`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
+  - CHECK (`nivel_ensino` IN ('fundamental', 'medio'))
 
 **3. Tabela `TrilhasEstudo`**
 
 - **Propósito:** Categorizar e organizar o conteúdo das aulas.
 - **Colunas:**
-  - `id_trilha` INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+  - `id_trilha` SERIAL PRIMARY KEY
   - `nome_trilha` VARCHAR(100) NOT NULL UNIQUE
   - `descricao_trilha` TEXT
-  - `nivel_trilha` ENUM('fundamental', 'medio') NOT NULL
+  - `nivel_trilha` VARCHAR(50) NOT NULL
+- **Restrições:**
+  - CHECK (`nivel_trilha` IN ('fundamental', 'medio'))
 
 **4. Tabela `Aulas`**
 
 - **Propósito:** Armazenar os detalhes das vídeo aulas.
 - **Colunas:**
-  - `id_aula` INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+  - `id_aula` SERIAL PRIMARY KEY
   - `id_trilha` INT NOT NULL
   - `titulo_aula` VARCHAR(255) NOT NULL
   - `descricao_aula` TEXT
   - `url_video` VARCHAR(255) NOT NULL
-  - `duracao` INT NOT NULL (Em minutos)
+  - `duracao` INT NOT NULL
   - `tema_aula` VARCHAR(100)
-  - `nivel_aula` ENUM('fundamental', 'medio') NOT NULL
+  - `nivel_aula` VARCHAR(50) NOT NULL
 - **Restrições:**
   - FOREIGN KEY (`id_trilha`) REFERENCES `TrilhasEstudo`(`id_trilha`) ON DELETE RESTRICT ON UPDATE CASCADE
+  - CHECK (`nivel_aula` IN ('fundamental', 'medio'))
 
 **5. Tabela `Exercicios`**
 
 - **Propósito:** Armazenar as questões e opções dos exercícios.
 - **Colunas:**
-  - `id_exercicio` INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+  - `id_exercicio` SERIAL PRIMARY KEY
   - `id_aula` INT NOT NULL
   - `titulo_exercicio` VARCHAR(255) NOT NULL
   - `descricao_exercicio` TEXT
-  - `tipo_exercicio` ENUM('multipla_escolha', 'verdadeiro_falso', 'aberta') NOT NULL
-  - `respostas_corretas` JSON NOT NULL (Para armazenar as respostas no formato JSON)
+  - `tipo_exercicio` VARCHAR(50) NOT NULL
+  - `respostas_corretas` JSONB NOT NULL
 - **Restrições:**
   - FOREIGN KEY (`id_aula`) REFERENCES `Aulas`(`id_aula`) ON DELETE CASCADE ON UPDATE CASCADE
+  - CHECK (`tipo_exercicio` IN ('multipla_escolha', 'verdadeiro_falso', 'aberta'))
 
 **6. Tabela `ProgressoAlunos`**
 
 - **Propósito:** Rastrear o andamento de cada aluno em cada aula.
 - **Colunas:**
-  - `id_progresso` INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+  - `id_progresso` SERIAL PRIMARY KEY
   - `id_aluno` INT NOT NULL
   - `id_aula` INT NOT NULL
-  - `status_aula` ENUM('iniciada', 'concluida', 'pendente') NOT NULL
+  - `status_aula` VARCHAR(50) NOT NULL
   - `porcentagem_conclusao` DECIMAL(5,2) DEFAULT 0.00
-  - `data_ultimo_acesso` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  - `data_ultimo_acesso` TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 - **Restrições:**
   - FOREIGN KEY (`id_aluno`) REFERENCES `Alunos`(`id_aluno`) ON DELETE CASCADE ON UPDATE CASCADE
   - FOREIGN KEY (`id_aula`) REFERENCES `Aulas`(`id_aula`) ON DELETE CASCADE ON UPDATE CASCADE
-  - UNIQUE (`id_aluno`, `id_aula`) (Garante que um aluno tenha apenas um registro de progresso por aula)
+  - UNIQUE (`id_aluno`, `id_aula`)
+  - CHECK (`status_aula` IN ('iniciada', 'concluida', 'pendente'))
 
 **7. Tabela `Gamificacao`**
 
 - **Propósito:** Registrar as recompensas (pontos e badges) conquistadas pelos alunos.
 - **Colunas:**
-  - `id_gamificacao` INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+  - `id_gamificacao` SERIAL PRIMARY KEY
   - `id_aluno` INT NOT NULL
   - `tipo_recompensa` VARCHAR(50) NOT NULL
   - `valor_recompensa` VARCHAR(255) NOT NULL
-  - `data_conquista` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  - `data_conquista` TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 - **Restrições:**
   - FOREIGN KEY (`id_aluno`) REFERENCES `Alunos`(`id_aluno`) ON DELETE CASCADE ON UPDATE CASCADE
 
@@ -416,76 +422,80 @@ O esquema relacional da plataforma "Trilha Do Saber" será implementado no MySQL
 
 ### 4.4.3 Modelo Físico
 
-O **Modelo Físico** é o script SQL que cria as tabelas no banco de dados.  
-Este script pode ser gerado automaticamente no MySQL Workbench a partir do esquema relacional.
+O **Modelo Físico** é o script SQL que cria as tabelas no banco de dados.
 
-#### Script SQL para Criação do Banco de Dados (MySQL):
+#### Script SQL para Criação do Banco de Dados (PostgreSQL/NeonDB):
 
 ```sql
 CREATE TABLE Usuarios (
-    id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_usuario SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
-    data_cadastro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    ultimo_login DATETIME
+    data_cadastro TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    ultimo_login TIMESTAMPTZ
 );
 
 CREATE TABLE Alunos (
-    id_aluno INT NOT NULL PRIMARY KEY,
-    nivel_ensino ENUM('fundamental', 'medio') NOT NULL,
+    id_aluno INT PRIMARY KEY,
+    nivel_ensino VARCHAR(50) NOT NULL,
     pontuacao_total INT DEFAULT 0,
-    FOREIGN KEY (id_aluno) REFERENCES Usuarios(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT fk_aluno_usuario FOREIGN KEY (id_aluno) REFERENCES Usuarios(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT chk_nivel_ensino CHECK (nivel_ensino IN ('fundamental', 'medio'))
 );
 
 CREATE TABLE TrilhasEstudo (
-    id_trilha INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_trilha SERIAL PRIMARY KEY,
     nome_trilha VARCHAR(100) NOT NULL UNIQUE,
     descricao_trilha TEXT,
-    nivel_trilha ENUM('fundamental', 'medio') NOT NULL
+    nivel_trilha VARCHAR(50) NOT NULL,
+    CONSTRAINT chk_nivel_trilha CHECK (nivel_trilha IN ('fundamental', 'medio'))
 );
 
 CREATE TABLE Aulas (
-    id_aula INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_aula SERIAL PRIMARY KEY,
     id_trilha INT NOT NULL,
     titulo_aula VARCHAR(255) NOT NULL,
     descricao_aula TEXT,
     url_video VARCHAR(255) NOT NULL,
     duracao INT NOT NULL,
     tema_aula VARCHAR(100),
-    nivel_aula ENUM('fundamental', 'medio') NOT NULL,
-    FOREIGN KEY (id_trilha) REFERENCES TrilhasEstudo(id_trilha) ON DELETE RESTRICT ON UPDATE CASCADE
+    nivel_aula VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_aula_trilha FOREIGN KEY (id_trilha) REFERENCES TrilhasEstudo(id_trilha) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT chk_nivel_aula CHECK (nivel_aula IN ('fundamental', 'medio'))
 );
 
 CREATE TABLE Exercicios (
-    id_exercicio INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_exercicio SERIAL PRIMARY KEY,
     id_aula INT NOT NULL,
     titulo_exercicio VARCHAR(255) NOT NULL,
     descricao_exercicio TEXT,
-    tipo_exercicio ENUM('multipla_escolha', 'verdadeiro_falso', 'aberta') NOT NULL,
-    respostas_corretas JSON NOT NULL,
-    FOREIGN KEY (id_aula) REFERENCES Aulas(id_aula) ON DELETE CASCADE ON UPDATE CASCADE
+    tipo_exercicio VARCHAR(50) NOT NULL,
+    respostas_corretas JSONB NOT NULL,
+    CONSTRAINT fk_exercicio_aula FOREIGN KEY (id_aula) REFERENCES Aulas(id_aula) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT chk_tipo_exercicio CHECK (tipo_exercicio IN ('multipla_escolha', 'verdadeiro_falso', 'aberta'))
 );
 
 CREATE TABLE ProgressoAlunos (
-    id_progresso INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_progresso SERIAL PRIMARY KEY,
     id_aluno INT NOT NULL,
     id_aula INT NOT NULL,
-    status_aula ENUM('iniciada', 'concluida', 'pendente') NOT NULL,
+    status_aula VARCHAR(50) NOT NULL,
     porcentagem_conclusao DECIMAL(5,2) DEFAULT 0.00,
-    data_ultimo_acesso DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_aluno) REFERENCES Alunos(id_aluno) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_aula) REFERENCES Aulas(id_aula) ON DELETE CASCADE ON UPDATE CASCADE,
-    UNIQUE (id_aluno, id_aula)
+    data_ultimo_acesso TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_progresso_aluno FOREIGN KEY (id_aluno) REFERENCES Alunos(id_aluno) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_progresso_aula FOREIGN KEY (id_aula) REFERENCES Aulas(id_aula) ON DELETE CASCADE ON UPDATE CASCADE,
+    UNIQUE (id_aluno, id_aula),
+    CONSTRAINT chk_status_aula CHECK (status_aula IN ('iniciada', 'concluida', 'pendente'))
 );
 
 CREATE TABLE Gamificacao (
-    id_gamificacao INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_gamificacao SERIAL PRIMARY KEY,
     id_aluno INT NOT NULL,
     tipo_recompensa VARCHAR(50) NOT NULL,
     valor_recompensa VARCHAR(255) NOT NULL,
-    data_conquista DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_aluno) REFERENCES Alunos(id_aluno) ON DELETE CASCADE ON UPDATE CASCADE
+    data_conquista TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_gamificacao_aluno FOREIGN KEY (id_aluno) REFERENCES Alunos(id_aluno) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ```
 
