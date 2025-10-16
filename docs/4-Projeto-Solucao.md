@@ -18,17 +18,9 @@ A arquitetura da solução será dividida em duas camadas principais, com uma in
 
 A comunicação entre o frontend e as Next.js API Routes ocorrerá de forma integrada na própria aplicação Next.js, e as API Routes se comunicarão com o NeonDB utilizando drivers PostgreSQL.
 
-**Orientações:**
+**Diagrama:**
 
-- Indique quais módulos compõem a solução (ex.: frontend, backend, banco de dados, APIs externas).
-- Especifique as tecnologias e frameworks adotados (ex.: React, Node.js, MySQL).
-- Explique como ocorre a comunicação entre os módulos.
-
-**Exemplo de diagrama:**
-
-![Exemplo de Arquitetura](./images/arquitetura-exemplo.png)
-
-📌 **Entrega:** inserir o diagrama e a descrição detalhada de cada parte.
+<img width="1195" height="785" alt="image" src="https://github.com/user-attachments/assets/c9ac2b1b-9cfa-44f3-a391-ce36c0c60094" />
 
 ---
 
