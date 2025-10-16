@@ -8,9 +8,6 @@
 
 ## 4.1. Arquitetura da Solução
 
-Nesta seção, descreva como os componentes do sistema se organizam e interagem.  
-Inclua um **diagrama de arquitetura** mostrando módulos, camadas e tecnologias utilizadas.
-
 A arquitetura da solução será dividida em duas camadas principais, com uma integração de banco de dados:
 
 - **Frontend e Backend (Next.js):** Desenvolvido com **Next.js**, o projeto unificará as camadas de frontend (interface do usuário e interatividade) e backend (lógica de negócio e APIs) através de suas funcionalidades de roteamento de API (Next.js API Routes). O frontend será responsável pela renderização da interface e consumo das APIs internas, enquanto o backend processará as requisições, gerenciará a lógica de negócio e interagirá com o banco de dados.
