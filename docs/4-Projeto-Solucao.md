@@ -193,6 +193,8 @@ O desenvolvimento deve seguir **três etapas**:
 O **Diagrama Entidade-Relacionamento (DER)** descreve as entidades, atributos e relacionamentos do sistema.  
 Utilize a ferramenta **[BR Modelo Web](https://www.brmodeloweb.com/lang/pt-br/index.html)** para criar o diagrama.
 
+![Diagrama Entidade-Relacionamento (DER)](images/diagramader.png)
+
 #### Descrição das Entidades e Relacionamentos:
 
 A modelagem do banco de dados relacional para a plataforma "Trilha Do Saber" é composta pelas seguintes entidades e seus respectivos atributos e relacionamentos:
