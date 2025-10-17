@@ -393,12 +393,6 @@ O esquema relacional da plataforma "Trilha Do Saber" será implementado no **Neo
 - **Restrições:**
   - FOREIGN KEY (`id_aluno`) REFERENCES `Alunos`(`id_aluno`) ON DELETE CASCADE ON UPDATE CASCADE
 
-**Orientações:**
-
-- Inclua todos os atributos das entidades.
-- Defina tipos de dados adequados para cada campo.
-- Configure as restrições de integridade (NOT NULL, UNIQUE, FOREIGN KEY, etc.).
-
 <img width="1730" height="938" alt="DIAGRAMAER" src="https://github.com/user-attachments/assets/d4b67a3d-6ef9-43cc-84d2-8399017453ea" />
 
 
