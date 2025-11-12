@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@custom-variant dark (&:is(.dark *));
+
+/* Paleta de Cores - Sala de Aula */
+:root {
+  --font-size: 16px;
+  
+  /* Cores principais - Sala de Aula */
+  --background: #F5F1E8; /* Bege claro - parede da sala */
+  --foreground: #2C3E2D; /* Verde escuro - texto no quadro */
+  
+  /* Cards - Papel branco */
+  --card: #FEFEFE;
+  --card-foreground: #2C3E2D;
+  
+  /* Popover */
+  --popover: #FEFEFE;
+  --popover-foreground: #2C3E2D;
+  
+  /* Primary - Verde quadro de giz */
+  --primary: #4A7C59; /* Verde quadro */
+  --primary-foreground: #FEFEFE; /* Giz branco */
+  
+  /* Secondary - Azul céu suave */
+  --secondary: #B8D4E3; /* Azul céu claro */
+  --secondary-foreground: #2C3E2D;
+  
+  /* Muted - Marrom madeira */
+  --muted: #D4C4A8; /* Madeira clara */
+  --muted-foreground: #6B5B4F; /* Madeira escura */
+  
+  /* Accent - Amarelo suave (luz do sol) */
+  --accent: #FFE66D; /* Amarelo suave */
+  --accent-foreground: #2C3E2D;
+  
+  /* Destructive - Vermelho caneta */
+  --destructive: #C73E1D; /* Vermelho caneta */
+  --destructive-foreground: #FEFEFE;
+  
+  /* Borders - Linhas do caderno */
+  --border: #D4C4A8;
+  --input: transparent;
+  --input-background: #FEFEFE;
+  --switch-background: #D4C4A8;
+  
+  /* Tipografia */
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  
+  /* Ring - Foco */
+  --ring: #4A7C59;
+  
+  /* Charts - Cores educacionais */
+  --chart-1: #4A7C59; /* Verde */
+  --chart-2: #B8D4E3; /* Azul */
+  --chart-3: #FFE66D; /* Amarelo */
+  --chart-4: #D4A574; /* Marrom */
+  --chart-5: #A8C5A0; /* Verde claro */
+  
+  /* Border radius - Cantos suaves */
+  --radius: 0.75rem;
+  
+  /* Sidebar */
+  --sidebar: #F0EBE0;
+  --sidebar-foreground: #2C3E2D;
+  --sidebar-primary: #4A7C59;
+  --sidebar-primary-foreground: #FEFEFE;
+  --sidebar-accent: #E8E0D4;
+  --sidebar-accent-foreground: #2C3E2D;
+  --sidebar-border: #D4C4A8;
+  --sidebar-ring: #4A7C59;
+}
+
+.dark {
+  /* Modo escuro - Sala noturna */
+  --background: #1A1A1A;
+  --foreground: #E8E0D4;
+  --card: #2A2A2A;
+  --card-foreground: #E8E0D4;
+  --popover: #2A2A2A;
+  --popover-foreground: #E8E0D4;
+  --primary: #6BA87A; /* Verde mais claro para contraste */
+  --primary-foreground: #1A1A1A;
+  --secondary: #4A6B7A;
+  --secondary-foreground: #E8E0D4;
+  --muted: #3A3A3A;
+  --muted-foreground: #A8A8A8;
+  --accent: #FFD93D;
+  --accent-foreground: #1A1A1A;
+  --destructive: #E85A4F;
+  --destructive-foreground: #E8E0D4;
+  --border: #3A3A3A;
+  --input: #3A3A3A;
+  --input-background: #2A2A2A;
+  --switch-background: #4A4A4A;
+  --ring: #6BA87A;
+  --chart-1: #6BA87A;
+  --chart-2: #4A6B7A;
+  --chart-3: #FFD93D;
+  --chart-4: #8B6F47;
+  --chart-5: #6BA87A;
+  --sidebar: #2A2A2A;
+  --sidebar-foreground: #E8E0D4;
+  --sidebar-primary: #6BA87A;
+  --sidebar-primary-foreground: #1A1A1A;
+  --sidebar-accent: #3A3A3A;
+  --sidebar-accent-foreground: #E8E0D4;
+  --sidebar-border: #3A3A3A;
+  --sidebar-ring: #6BA87A;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+/**
+ * Base typography - Estilo educacional
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: 2rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--primary);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      color: var(--primary);
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      color: var(--foreground);
+    }
+
+    h4 {
+      font-size: 1.25rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      color: var(--foreground);
+    }
+
+    p {
+      font-size: var(--font-size);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.6;
+      color: var(--foreground);
+    }
+
+    label {
+      font-size: var(--font-size);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      color: var(--foreground);
+    }
+
+    button {
+      font-size: var(--font-size);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--font-size);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Efeitos visuais adicionais para tema de sala de aula */
+@layer utilities {
+  .classroom-shadow {
+    box-shadow: 0 2px 8px rgba(44, 62, 45, 0.1), 0 1px 3px rgba(44, 62, 45, 0.08);
+  }
+  
+  .classroom-card {
+    @apply bg-card border border-border rounded-lg classroom-shadow;
+    background: linear-gradient(to bottom, var(--card), var(--background));
+  }
+}
