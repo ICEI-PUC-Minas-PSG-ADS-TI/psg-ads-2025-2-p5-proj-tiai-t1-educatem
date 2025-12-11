@@ -15,7 +15,7 @@ import { api } from "../src/lib/api";
 interface HomePageProps {
   isLoggedIn: boolean;
   userName?: string;
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, courseId?: number, materia?: string) => void;
   userId?: number | null;
 }
 
@@ -250,13 +250,28 @@ export function HomePage({
             <Card
               key={subject.name}
               className="hover:shadow-md transition-shadow cursor-pointer"
-              onClick={() => onNavigate("trilhas")}
+              onClick={() => onNavigate("trilhas", undefined, subject.name)}
             >
               <CardHeader>
-                <CardTitle>{subject.name}</CardTitle>
+                <CardTitle 
+                  className="hover:text-primary transition-colors cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onNavigate("trilhas", undefined, subject.name);
+                  }}
+                >
+                  {subject.name}
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onNavigate("trilhas", undefined, subject.name);
+                  }}
+                >
                   Ver trilhas
                 </Button>
               </CardContent>

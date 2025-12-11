@@ -14,7 +14,7 @@ interface HeaderProps {
   userName?: string;
   onLogin: () => void;
   onLogout: () => void;
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, courseId?: number, materia?: string) => void;
 }
 
 export function Header({

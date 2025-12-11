@@ -11,9 +11,10 @@ import { Play, Clock, Search, BookOpen, Trophy } from "lucide-react"
 import { api } from "../src/lib/api"
 
 interface TrilhasPageProps {
-  onNavigate: (page: string, courseId?: number) => void
+  onNavigate: (page: string, courseId?: number, materia?: string) => void
   isLoggedIn: boolean
   userId?: number | null
+  initialMateria?: string | null
 }
 
 interface Trilha {
@@ -43,15 +44,22 @@ interface ProgressoDisciplina {
   progresso_medio: number
 }
 
-export function TrilhasPage({ onNavigate, isLoggedIn, userId }: TrilhasPageProps) {
+export function TrilhasPage({ onNavigate, isLoggedIn, userId, initialMateria }: TrilhasPageProps) {
   const [searchTerm, setSearchTerm] = useState("")
   const [trilhas, setTrilhas] = useState<Trilha[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedTab, setSelectedTab] = useState("todos")
-  const [selectedMateria, setSelectedMateria] = useState<string>("todas")
+  const [selectedMateria, setSelectedMateria] = useState<string>(initialMateria || "todas")
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false)
   const [progressoDisciplinas, setProgressoDisciplinas] = useState<ProgressoDisciplina[]>([])
   const [loadingProgress, setLoadingProgress] = useState(false)
+
+  useEffect(() => {
+    // Atualizar selectedMateria quando initialMateria mudar
+    if (initialMateria !== undefined) {
+      setSelectedMateria(initialMateria || "todas")
+    }
+  }, [initialMateria])
 
   useEffect(() => {
     loadTrilhas()

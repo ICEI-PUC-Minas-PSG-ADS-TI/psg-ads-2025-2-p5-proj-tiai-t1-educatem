@@ -11,6 +11,7 @@ import { api } from "./src/lib/api";
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [currentCourseId, setCurrentCourseId] = useState<number | null>(null);
+  const [selectedMateria, setSelectedMateria] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -27,10 +28,16 @@ export default function App() {
     }
   }, []);
 
-  const handleNavigate = (page: string, courseId?: number) => {
+  const handleNavigate = (page: string, courseId?: number, materia?: string) => {
     setCurrentPage(page);
     if (courseId) {
       setCurrentCourseId(courseId);
+    }
+    if (materia !== undefined) {
+      setSelectedMateria(materia);
+    } else if (page !== "trilhas") {
+      // Limpar filtro de matéria se não estiver indo para trilhas
+      setSelectedMateria(null);
     }
 
     // Se tentar acessar área restrita sem login, mostrar modal
@@ -125,6 +132,7 @@ export default function App() {
             onNavigate={handleNavigate}
             isLoggedIn={isLoggedIn}
             userId={userId}
+            initialMateria={selectedMateria}
           />
         );
       case "curso":
