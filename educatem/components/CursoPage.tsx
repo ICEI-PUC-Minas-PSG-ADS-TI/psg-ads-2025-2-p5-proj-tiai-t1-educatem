@@ -15,6 +15,7 @@ import {
   Lock
 } from "lucide-react"
 import { api } from "../src/lib/api"
+import { VideoPlayer } from "./VideoPlayer"
 
 interface CursoPageProps {
   courseId: number
@@ -200,21 +201,26 @@ export function CursoPage({ courseId, onNavigate, isLoggedIn, userId }: CursoPag
             <Card>
               <CardContent className="p-0">
                 {currentAula ? (
-                  <div className="aspect-video bg-muted flex items-center justify-center">
-                    <div className="text-center space-y-2">
-                      <Play className="h-12 w-12 mx-auto" />
-                      <p className="font-medium">{currentAula.titulo_aula}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {formatDuration(currentAula.duracao)}
-                      </p>
-                      {currentAula.url_video && (
-                        <Button 
-                          onClick={() => window.open(currentAula.url_video, '_blank')}
-                          className="mt-4"
-                        >
-                          Assistir Vídeo
-                        </Button>
+                  <div className="space-y-4">
+                    <VideoPlayer
+                      url={currentAula.url_video}
+                      title={currentAula.titulo_aula}
+                      className="w-full"
+                    />
+                    <div className="p-4 space-y-2">
+                      <h3 className="text-lg font-semibold">{currentAula.titulo_aula}</h3>
+                      {currentAula.descricao_aula && (
+                        <p className="text-sm text-muted-foreground">
+                          {currentAula.descricao_aula}
+                        </p>
                       )}
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-4 w-4" />
+                          {formatDuration(currentAula.duracao)}
+                        </div>
+                        <Badge>{currentAula.tema_aula}</Badge>
+                      </div>
                     </div>
                   </div>
                 ) : (
