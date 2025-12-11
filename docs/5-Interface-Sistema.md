@@ -12,8 +12,8 @@
 | Categoria             | Tecnologia/Ferramenta | Justificativa de uso |
 |-----------------------|------------------------|----------------------|
 | Linguagem             | JavaScript             | Implementação das funcionalidades do front-end. |
-| Framework Front-end   | React.js               | Criação de interfaces dinâmicas e reutilizáveis. |
-| Banco de Dados        | MySQL                  | Armazenamento e gerenciamento de dados. |
+| Framework Front-end   | Next.js               | Criação de interfaces dinâmicas e reutilizáveis. |
+| Banco de Dados        | NeonDB/PostgreSQL/AWS S3                  | Armazenamento e gerenciamento de dados. |
 | Ferramenta de Design  | Figma                  | Criação de protótipos e wireframes. |
 | IDE                   | VS Code                | Ambiente principal de desenvolvimento. |
 
@@ -28,9 +28,12 @@
 
 | Requisito/Tela                | Status | Última atualização | Próxima entrega |
 |--------------------------------|--------|--------------------|-----------------|
-| Tela principal                 | 🟢 Concluída     | 10/08/2025         | -               |
-| Tela de login                  | 🟡 Em andamento | 09/08/2025         | 15/08/2025      |
-| Tela de cadastro de produto    | 🔴 Não iniciada | -                  | 20/08/2025      |
+| Tela principal                 | 🟢 Concluída     | 11/12/2025         | -               |
+| Tela de login                  | 🟢 Concluída | 11/12/2025         | -      |
+| Tela de trilhas de estudo    | 🟢 Concluída | 11/12/2025                  | -      |
+| Tela de conquistas    | 🟢 Concluída | 11/12/2025                  | -      |
+| Tela "Sobre"    | 🟢 Concluída | 11/12/2025                  | -      |
+| Tela de perfil do usuário    | 🟡 Em andamento | 11/12/2025                  | 11/12/2025      |
 
 Legenda: 🟢 Concluído | 🟡 Em andamento | 🔴 Não iniciado
 
@@ -40,21 +43,38 @@ Legenda: 🟢 Concluído | 🟡 Em andamento | 🔴 Não iniciado
 
 #### 5.3.1 Tela principal do sistema
 **Descrição:** Apresenta visão geral das funcionalidades e acessos principais.  
-[`Tela principal do sistema`](images/)
+[`Tela principal do sistema`](images/telainicialfinal.png)
 
 ---
 
 #### 5.3.2 Tela de login
 **Descrição:** Permite acesso de usuários registrados.  
-[`Tela de login`](images/)
+[`Tela de login`](images/telaloginfinal.png)
 
 ---
 
-#### 5.3.3 Tela de cadastro de produto
-**Descrição:** Formulário para inserir novos produtos no estoque.  
-[`Tela de cadastro`](images/)
+#### 5.3.3 Tela de trilhas de estudo
+**Descrição:** Disponibiliza todas as trilhas de estudo para o usuário.
+[`Tela das trilhas de estudo`](images/telatrilhasfinal.png)
 
 ---
+
+#### 5.3.4 Tela de vídeoaula
+**Descrição:** Todas as aulas disponíveis na trilha de estudo listadas em ordem.
+[`Tela do curso`](images/telacursofinal.png)
+
+---
+
+#### 5.3.5 Tela de conquistas
+**Descrição:** Mostra a relação de todas as conquistas realizadas pelo usuário.
+[`Tela de conquistas`](images/telaconquistasfinal.png)
+
+---
+
+#### 5.3.6 Tela "Sobre"
+**Descrição:** Escopo geral do projeto e o objetivo pelo qual foi desenvolvido.
+[`Tela sobre`](images/telasobre.png)
+
 
 > **📢 AVISO IMPORTANTE – ATUALIZAÇÃO DE PROGRESSO**  
 > *(leia com atenção antes de finalizar a sprint)*  

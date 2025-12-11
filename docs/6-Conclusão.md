@@ -1,22 +1,19 @@
 ## 6. Conclusão
 
-<span style="color:red">Pré-requisitos: Ter terminado o desenvolvimento do projeto</a></span>
+O projeto “EducaTem” entregou uma plataforma web de reforço escolar baseada em Next.js, com arquitetura integrada a NeonDB e foco em acessibilidade. Consolidamos requisitos funcionais e não funcionais, modelamos dados (DER, esquema relacional e script físico), desenhamos UML de classes e implementamos um protótipo navegável com telas principais concluídas (home, login, trilhas, vídeo-aulas, conquistas e sobre), evidenciando a viabilidade da solução e a coerência com os objetivos de ampliar o acesso a conteúdo educacional gratuito e engajador.
 
-_Apresentem, aqui, a conclusão do trabalho, que deve conter uma síntese dos principais resultados obtidos com a melhoria dos processos, uma discussão das limitações da solução proposta e sugestões de novas linhas de estudo._
+Resultados alcançados:
+- Organizou trilhas de estudo com acompanhamento de progresso e elementos de gamificação para motivar os alunos.
+- Definiu regras de negócio que controlam acesso, desbloqueio de aulas e concessão de recompensas, alinhadas às metas pedagógicas.
+- Estruturou o banco em PostgreSQL/NeonDB para suportar cadastro, aulas, exercícios e progresso, com integridade e segurança.
+- Produziu wireframes/mockups e telas finais responsivas, garantindo usabilidade inicial e navegação intuitiva.
 
-_🗑️ **RECOMENDA-SE** apagar os textos dos exemplos antes de enviar, para deixar mais claras as informações sobre o projeto de software do grupo._
+Limitações identificadas:
+- Tela de perfil do usuário ainda em desenvolvimento e dependente de integração completa com backend.
+- Ausência de testes automatizados e de validação com usuários reais; não há métricas de desempenho em produção.
+- Recursos avançados (recomendação personalizada, analytics de aprendizagem e suporte offline/baixa conexão) não foram implementados nesta entrega.
 
-
----
-
-**🗑️Exemplo 1 – Comércio eletrônico**  
-> A implementação da nova plataforma de vendas online resultou em um aumento de 35% no volume de pedidos e reduziu o tempo de finalização da compra de 7 para 4 minutos.  
-> Apesar dos avanços, ainda há necessidade de melhorar a experiência em dispositivos móveis, pois 20% dos clientes relataram dificuldades na navegação.  
-> Como trabalhos futuros, recomenda-se a otimização responsiva da interface e a integração com um sistema de recomendação baseado em inteligência artificial.
-
-**🗑️Exemplo 2 – Área da saúde**  
-> A criação do sistema de agendamento de consultas online reduziu em 50% o número de ligações telefônicas e melhorou a organização dos atendimentos.  
-> Entretanto, observou-se que pacientes idosos ainda apresentam dificuldades em utilizar a plataforma de forma autônoma.  
-> Sugere-se, para próximas etapas, a criação de um tutorial em vídeo e a disponibilização de um canal de suporte por chat.
----
-
+Próximas linhas de evolução:
+- Finalizar e integrar o perfil do usuário, incluindo edição de dados e preferências de estudo.
+- Implementar rotas seguras de backend, testes automatizados (frontend, API e banco) e monitoramento de desempenho.
+- Adicionar recomendações personalizadas, dashboards de progresso para alunos/responsáveis e relatórios para professores.
