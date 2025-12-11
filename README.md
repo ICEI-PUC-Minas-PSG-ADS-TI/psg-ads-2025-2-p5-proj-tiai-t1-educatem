@@ -4,7 +4,7 @@ Análise e Desenvolvimento de Sistemas - Sistema de Informação
 
 Trabalho Interdisciplinar
 
-4° Semestre
+5° Semestre
 
 O EducaTem é uma plataforma de vídeo aulas interativas sobre matérias básicas, criada para tornar o aprendizado simples, acessível e envolvente. Com trilhas de estudo organizadas por temas e níveis, o aluno pode assistir aulas online, praticar com exercícios em tempo real e acompanhar seu progresso de forma gamificada. Seja para reforçar conteúdos da escola, revisar para provas ou aprender no seu próprio ritmo, o EducaTem oferece conhecimento de qualidade em poucos cliques.
 
