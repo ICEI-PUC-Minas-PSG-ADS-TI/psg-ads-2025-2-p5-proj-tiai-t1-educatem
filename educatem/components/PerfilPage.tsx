@@ -131,14 +131,14 @@ export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               {usuario && (
                 <>
-                  <div className="flex items-center gap-1">
-                    <Calendar className="h-4 w-4" />
+              <div className="flex items-center gap-1">
+                <Calendar className="h-4 w-4" />
                     Membro desde {formatDate(usuario.data_cadastro)}
-                  </div>
-                  <div className="flex items-center gap-1">
+              </div>
+              <div className="flex items-center gap-1">
                     <BookOpen className="h-4 w-4" />
                     {usuario.nivel_ensino === 'fundamental' ? 'Fundamental' : 'Médio'}
-                  </div>
+              </div>
                 </>
               )}
             </div>
@@ -226,14 +226,14 @@ export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
                       : 0
                     return (
                       <div key={tema.tema_aula} className="space-y-2">
-                        <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center">
                           <span className="font-medium">{tema.tema_aula}</span>
-                          <span className="text-sm text-muted-foreground">
+                      <span className="text-sm text-muted-foreground">
                             {progress}% • {tema.aulas_concluidas}/{tema.total_aulas} aulas
-                          </span>
-                        </div>
+                      </span>
+                    </div>
                         <Progress value={progress} />
-                      </div>
+                  </div>
                     )
                   })
                 ) : (
@@ -258,24 +258,24 @@ export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
             </CardHeader>
             <CardContent>
               {badges.length > 0 ? (
-                <div className="grid grid-cols-2 gap-3">
-                  {badges.map((badge) => (
-                    <div 
+              <div className="grid grid-cols-2 gap-3">
+                {badges.map((badge) => (
+                  <div 
                       key={badge.id_gamificacao} 
                       className="p-3 rounded-lg border bg-primary/5 border-primary/20 text-center space-y-2"
                     >
-                      <div>
+                    <div>
                         <p className="text-sm font-medium">{badge.tipo_recompensa}</p>
-                        <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                           {formatDate(badge.data_conquista)}
-                        </p>
-                      </div>
+                      </p>
+                    </div>
                       <Badge variant="secondary" className="text-xs">
                         Conquistada
                       </Badge>
-                    </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
+              </div>
               ) : (
                 <div className="text-center py-8 text-muted-foreground">
                   Nenhuma conquista ainda. Continue estudando!

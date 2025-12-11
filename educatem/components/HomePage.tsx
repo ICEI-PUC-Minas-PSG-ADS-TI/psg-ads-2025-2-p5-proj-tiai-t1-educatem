@@ -161,12 +161,12 @@ export function HomePage({
                     : 0;
                   return (
                     <div key={tema.tema_aula} className="space-y-2">
-                      <div className="flex justify-between">
+                <div className="flex justify-between">
                         <span>{tema.tema_aula}</span>
                         <span>{progress}%</span>
-                      </div>
+                </div>
                       <Progress value={progress} />
-                    </div>
+              </div>
                   );
                 })
               ) : (
@@ -191,19 +191,19 @@ export function HomePage({
                 </div>
               ) : aulasRecentes.length > 0 ? (
                 aulasRecentes.map((aula, index) => (
-                  <div
+                <div
                     key={index}
-                    className="flex items-center justify-between p-2 hover:bg-muted rounded"
-                  >
-                    <div>
+                  className="flex items-center justify-between p-2 hover:bg-muted rounded"
+                >
+                  <div>
                       <p className="text-sm">{aula.titulo_aula}</p>
-                      <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                         {aula.nome_trilha}
-                      </p>
-                    </div>
+                    </p>
+                  </div>
                     <Button variant="ghost" size="sm" onClick={() => onNavigate('trilhas')}>
-                      <Play className="h-4 w-4" />
-                    </Button>
+                    <Play className="h-4 w-4" />
+                  </Button>
                   </div>
                 ))
               ) : (
@@ -230,7 +230,7 @@ export function HomePage({
                 badges.slice(0, 4).map((badge) => (
                   <Badge key={badge.id_gamificacao} variant="secondary">
                     {badge.tipo_recompensa}
-                  </Badge>
+              </Badge>
                 ))
               ) : (
                 <div className="text-center py-4 text-muted-foreground">
