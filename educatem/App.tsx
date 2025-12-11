@@ -5,6 +5,7 @@ import { TrilhasPage } from "./components/TrilhasPage";
 import { CursoPage } from "./components/CursoPage";
 import { PerfilPage } from "./components/PerfilPage";
 import { ConquistasPage } from "./components/ConquistasPage";
+import { SobrePage } from "./components/SobrePage";
 import { LoginModal } from "./components/LoginModal";
 import { api } from "./src/lib/api";
 
@@ -185,6 +186,13 @@ export default function App() {
             userName={userName}
             onNavigate={handleNavigate}
             userId={userId}
+          />
+        );
+      case "sobre":
+        return (
+          <SobrePage
+            onNavigate={handleNavigate}
+            isLoggedIn={isLoggedIn}
           />
         );
       default:
