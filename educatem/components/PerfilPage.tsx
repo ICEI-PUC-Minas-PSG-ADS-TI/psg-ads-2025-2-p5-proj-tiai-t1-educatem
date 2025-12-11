@@ -1,118 +1,132 @@
-import { useEffect, useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
-import { Badge } from "./ui/badge"
-import { Progress } from "./ui/progress"
-import { Avatar, AvatarFallback } from "./ui/avatar"
-import { 
-  Trophy, 
-  Star, 
-  Clock, 
-  BookOpen, 
+import { useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Badge } from "./ui/badge";
+import { Progress } from "./ui/progress";
+import { Avatar, AvatarFallback } from "./ui/avatar";
+import {
+  Trophy,
+  Star,
+  Clock,
+  BookOpen,
   Target,
   Calendar,
   Award,
-  Flame
-} from "lucide-react"
-import { api } from "../src/lib/api"
+  Flame,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "./ui/button";
+import { api } from "../src/lib/api";
 
 interface PerfilPageProps {
-  userName: string
-  userEmail: string
-  userId: number
+  userName: string;
+  userEmail: string;
+  userId: number;
+  onNavigate?: (page: string) => void;
 }
 
 interface Usuario {
-  id_usuario: number
-  nome: string
-  email: string
-  data_cadastro: string
-  nivel_ensino: string
-  pontuacao_total: number
+  id_usuario: number;
+  nome: string;
+  email: string;
+  data_cadastro: string;
+  nivel_ensino: string;
+  pontuacao_total: number;
 }
 
 interface ProgressoTema {
-  tema_aula: string
-  total_aulas: number
-  aulas_concluidas: number
-  progresso_medio: number
+  tema_aula: string;
+  total_aulas: number;
+  aulas_concluidas: number;
+  progresso_medio: number;
 }
 
 interface Gamificacao {
-  id_gamificacao: number
-  tipo_recompensa: string
-  valor_recompensa: string
-  data_conquista: string
+  id_gamificacao: number;
+  tipo_recompensa: string;
+  valor_recompensa: string;
+  data_conquista: string;
 }
 
 interface Estatisticas {
-  totalBadges: number
-  completedCourses: number
-  totalMinutes: number
+  totalBadges: number;
+  completedCourses: number;
+  totalMinutes: number;
 }
 
-export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
-  const [usuario, setUsuario] = useState<Usuario | null>(null)
-  const [progressoTemas, setProgressoTemas] = useState<ProgressoTema[]>([])
-  const [badges, setBadges] = useState<Gamificacao[]>([])
-  const [estatisticas, setEstatisticas] = useState<Estatisticas | null>(null)
-  const [loading, setLoading] = useState(true)
+export function PerfilPage({
+  userName,
+  userEmail,
+  userId,
+  onNavigate,
+}: PerfilPageProps) {
+  const [usuario, setUsuario] = useState<Usuario | null>(null);
+  const [progressoTemas, setProgressoTemas] = useState<ProgressoTema[]>([]);
+  const [badges, setBadges] = useState<Gamificacao[]>([]);
+  const [estatisticas, setEstatisticas] = useState<Estatisticas | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadProfileData()
-  }, [userId])
+    loadProfileData();
+  }, [userId]);
 
   const loadProfileData = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
 
       // Carregar dados do usuário
-      const usuarioResponse = await api.getUsuario(userId)
+      const usuarioResponse = await api.getUsuario(userId);
       if (usuarioResponse.data) {
-        setUsuario(usuarioResponse.data)
+        setUsuario(usuarioResponse.data);
       }
 
       // Carregar progresso por tema
-      const temasResponse = await api.getProgressoPorTema(userId)
+      const temasResponse = await api.getProgressoPorTema(userId);
       if (temasResponse.data) {
-        setProgressoTemas(temasResponse.data)
+        setProgressoTemas(temasResponse.data);
       }
 
       // Carregar badges
-      const badgesResponse = await api.getGamificacao(userId)
+      const badgesResponse = await api.getGamificacao(userId);
       if (badgesResponse.data) {
-        setBadges(badgesResponse.data)
+        setBadges(badgesResponse.data);
       }
 
       // Carregar estatísticas
-      const statsResponse = await api.getEstatisticas(userId)
+      const statsResponse = await api.getEstatisticas(userId);
       if (statsResponse.data) {
-        setEstatisticas(statsResponse.data)
+        setEstatisticas(statsResponse.data);
       }
     } catch (error) {
-      console.error('Erro ao carregar dados do perfil:', error)
+      console.error("Erro ao carregar dados do perfil:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const formatDate = (dateString: string) => {
-    if (!dateString) return 'Data não disponível'
-    const date = new Date(dateString)
-    return date.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })
-  }
+    if (!dateString) return "Data não disponível";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+  };
 
   const formatDuration = (minutes: number) => {
-    if (!minutes) return 0
-    const hours = Math.floor(minutes / 60)
-    return hours
-  }
+    if (!minutes) return 0;
+    const hours = Math.floor(minutes / 60);
+    return hours;
+  };
 
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="text-center">Carregando perfil...</div>
       </div>
-    )
+    );
   }
 
   return (
@@ -137,7 +151,9 @@ export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
                   </div>
                   <div className="flex items-center gap-1">
                     <BookOpen className="h-4 w-4" />
-                    {usuario.nivel_ensino === 'fundamental' ? 'Fundamental' : 'Médio'}
+                    {usuario.nivel_ensino === "fundamental"
+                      ? "Fundamental"
+                      : "Médio"}
                   </div>
                 </>
               )}
@@ -200,10 +216,10 @@ export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
-                {badges.length}
-              </div>
-              <p className="text-xs text-muted-foreground">Badges conquistadas</p>
+              <div className="text-2xl font-bold">{badges.length}</div>
+              <p className="text-xs text-muted-foreground">
+                Badges conquistadas
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -221,20 +237,24 @@ export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
               <CardContent className="space-y-4">
                 {progressoTemas.length > 0 ? (
                   progressoTemas.map((tema) => {
-                    const progress = tema.total_aulas > 0
-                      ? Math.round((tema.aulas_concluidas / tema.total_aulas) * 100)
-                      : 0
+                    const progress =
+                      tema.total_aulas > 0
+                        ? Math.round(
+                            (tema.aulas_concluidas / tema.total_aulas) * 100
+                          )
+                        : 0;
                     return (
                       <div key={tema.tema_aula} className="space-y-2">
                         <div className="flex justify-between items-center">
                           <span className="font-medium">{tema.tema_aula}</span>
                           <span className="text-sm text-muted-foreground">
-                            {progress}% • {tema.aulas_concluidas}/{tema.total_aulas} aulas
+                            {progress}% • {tema.aulas_concluidas}/
+                            {tema.total_aulas} aulas
                           </span>
                         </div>
                         <Progress value={progress} />
                       </div>
-                    )
+                    );
                   })
                 ) : (
                   <div className="text-center py-8 text-muted-foreground">
@@ -248,24 +268,39 @@ export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
           {/* Badges/Conquistas */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Award className="h-5 w-5" />
-                Conquistas
-              </CardTitle>
-              <CardDescription>
-                Continue estudando para desbloquear novas badges!
-              </CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2">
+                    <Award className="h-5 w-5" />
+                    Conquistas
+                  </CardTitle>
+                  <CardDescription>
+                    Continue estudando para desbloquear novas badges!
+                  </CardDescription>
+                </div>
+                {onNavigate && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => onNavigate("conquistas")}
+                    className="flex items-center gap-2">
+                    Ver todas
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                )}
+              </div>
             </CardHeader>
             <CardContent>
               {badges.length > 0 ? (
                 <div className="grid grid-cols-2 gap-3">
-                  {badges.map((badge) => (
-                    <div 
-                      key={badge.id_gamificacao} 
-                      className="p-3 rounded-lg border bg-primary/5 border-primary/20 text-center space-y-2"
-                    >
+                  {badges.slice(0, 4).map((badge) => (
+                    <div
+                      key={badge.id_gamificacao}
+                      className="p-3 rounded-lg border bg-primary/5 border-primary/20 text-center space-y-2">
                       <div>
-                        <p className="text-sm font-medium">{badge.tipo_recompensa}</p>
+                        <p className="text-sm font-medium">
+                          {badge.tipo_recompensa}
+                        </p>
                         <p className="text-xs text-muted-foreground">
                           {formatDate(badge.data_conquista)}
                         </p>
@@ -275,6 +310,20 @@ export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
                       </Badge>
                     </div>
                   ))}
+                  {badges.length > 4 && onNavigate && (
+                    <div
+                      className="p-3 rounded-lg border border-dashed border-primary/30 text-center flex items-center justify-center cursor-pointer hover:bg-primary/5 transition-colors"
+                      onClick={() => onNavigate("conquistas")}>
+                      <div className="space-y-1">
+                        <p className="text-sm font-medium text-muted-foreground">
+                          +{badges.length - 4} mais
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          Ver todas
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="text-center py-8 text-muted-foreground">
@@ -286,5 +335,5 @@ export function PerfilPage({ userName, userEmail, userId }: PerfilPageProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
