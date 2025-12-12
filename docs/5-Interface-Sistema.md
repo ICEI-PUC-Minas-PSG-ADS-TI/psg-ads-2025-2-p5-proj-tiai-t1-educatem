@@ -33,7 +33,7 @@
 | Tela de trilhas de estudo    | 🟢 Concluída | 11/12/2025                  | -      |
 | Tela de conquistas    | 🟢 Concluída | 11/12/2025                  | -      |
 | Tela "Sobre"    | 🟢 Concluída | 11/12/2025                  | -      |
-| Tela de perfil do usuário    | 🟡 Em andamento | 11/12/2025                  | 11/12/2025      |
+| Tela de perfil do usuário    | 🟢 Concluída | 11/12/2025                  | 11/12/2025      |
 
 Legenda: 🟢 Concluído | 🟡 Em andamento | 🔴 Não iniciado
 
